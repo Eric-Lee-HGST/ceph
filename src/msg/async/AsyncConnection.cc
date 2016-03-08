@@ -207,6 +207,8 @@ AsyncConnection::~AsyncConnection()
     delete[] recv_buf;
   if (state_buffer)
     delete[] state_buffer;
+  if (msgr)
+    reinterpret_cast<AsyncMessenger*>(msgr)->release_worker(center);
 }
 
 /* return -1 means `fd` occurs error or closed, it should be closed
